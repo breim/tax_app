@@ -38,14 +38,14 @@ module TaxCalculator
     end
 
     def price_with_taxes
-      (@product.price + tax_value).round(2)
+      (@product.price + tax_amount).round(2)
     end
 
-    def tax_value
+    def tax_amount
       return 0.0 unless tax_rate.positive?
 
-      tax_amount = @product.price * tax_rate
-      TaxCalculator.round_up(tax_amount)
+      tax_total = @product.price * tax_rate
+      TaxCalculator.round_up(tax_total)
     end
 
     private

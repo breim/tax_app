@@ -100,7 +100,7 @@ RSpec.describe TaxCalculator do
     subject(:calculator) { described_class.new(book) }
 
     it 'calculates zero tax' do
-      expect(calculator.tax_value).to eq(0.0)
+      expect(calculator.tax_amount).to eq(0.0)
     end
 
     it 'returns original price' do
@@ -113,11 +113,11 @@ RSpec.describe TaxCalculator do
 
     it 'calculates correct tax amount' do
       expected_tax = TaxCalculator.round_up(toy.price * 0.10)
-      expect(calculator.tax_value).to eq(expected_tax)
+      expect(calculator.tax_amount).to eq(expected_tax)
     end
 
     it 'calculates correct final price' do
-      expected_price = (toy.price + calculator.tax_value).round(2)
+      expected_price = (toy.price + calculator.tax_amount).round(2)
       expect(calculator.price_with_taxes).to eq(expected_price)
     end
 
@@ -126,7 +126,7 @@ RSpec.describe TaxCalculator do
       subject(:calculator) { described_class.new(product) }
 
       it 'calculates correct values' do
-        expect(calculator.tax_value).to eq(1.50)
+        expect(calculator.tax_amount).to eq(1.50)
         expect(calculator.price_with_taxes).to eq(16.49)
       end
     end
@@ -138,11 +138,11 @@ RSpec.describe TaxCalculator do
 
       it 'applies only import tax' do
         expected_tax = TaxCalculator.round_up(imported_book.price * 0.05)
-        expect(calculator.tax_value).to eq(expected_tax)
+        expect(calculator.tax_amount).to eq(expected_tax)
       end
 
       it 'calculates correct final price' do
-        expected_price = (imported_book.price + calculator.tax_value).round(2)
+        expected_price = (imported_book.price + calculator.tax_amount).round(2)
         expect(calculator.price_with_taxes).to eq(expected_price)
       end
     end
@@ -152,11 +152,11 @@ RSpec.describe TaxCalculator do
 
       it 'applies both import and basic tax' do
         expected_tax = TaxCalculator.round_up(imported_perfume.price * 0.15)
-        expect(calculator.tax_value).to eq(expected_tax)
+        expect(calculator.tax_amount).to eq(expected_tax)
       end
 
       it 'calculates correct final price' do
-        expected_price = (imported_perfume.price + calculator.tax_value).round(2)
+        expected_price = (imported_perfume.price + calculator.tax_amount).round(2)
         expect(calculator.price_with_taxes).to eq(expected_price)
       end
     end
