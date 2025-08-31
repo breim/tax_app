@@ -4,31 +4,44 @@ require './src/cart'
 require './src/product'
 
 RSpec.describe Cart do
-  let(:subject) { described_class.new }
+  subject(:cart) { described_class.new }
+
+  let(:book) { Product.new(name: 'Book', price: 999.99, category: 'food', imported: false) }
+  let(:phone) { Product.new(name: 'Phone', price: 499.99, category: 'food', imported: false) }
+  let(:taxable_product) { Product.new(name: 'Laptop', price: 1000, category: 'eletronic', imported: false) }
 
   describe '#initialize' do
-    it 'creates a cart with an empty products array' do
-      expect(subject).to be_a(Cart)
-      expect(subject.products).to eq([])
+    it 'initializes with an empty products array' do
+      expect(cart).to be_a(Cart)
+      expect(cart.products).to be_empty
     end
   end
 
   describe '#add_product' do
-    it 'adds a product to the cart' do
-      product = Product.new(name: 'Laptop', price: 999.99, category: 'food', imported: false)
-      subject.add_product(product)
-      expect(subject.products).to include(product)
+    context 'when adding a single product' do
+      it 'includes the product in the cart' do
+        cart.add_product(book)
+
+        expect(cart.products).to include(book)
+      end
+    end
+
+    context 'when adding a taxable product' do
+      it 'calculates and assigns tax amount to the product' do
+        cart.add_product(taxable_product)
+
+        expect(cart.products.first.tax_amount).to eq(100)
+      end
     end
   end
 
   describe '#clear' do
-    it 'clears all products from the cart' do
-      product1 = Product.new(name: 'Laptop', price: 999.99, category: 'food', imported: false)
-      product2 = Product.new(name: 'Phone', price: 499.99, category: 'food', imported: false)
-      subject.add_product(product1)
-      subject.add_product(product2)
-      subject.clear
-      expect(subject.products).to eq([])
+    it 'removes all products from the cart' do
+      cart.add_product(book)
+      cart.add_product(phone)
+      cart.clear
+
+      expect(cart.products).to be_empty
     end
   end
 end
