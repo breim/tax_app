@@ -5,11 +5,11 @@ require './src/product'
 RSpec.describe Product do
   describe '#initialize' do
     it 'creates a product with name and price' do
-      product = Product.new('Laptop', 999.99, 'Food')
+      product = Product.new(name: 'Laptop', price: 999.99, category: 'food', imported: false)
       expect(product).to be_a(Product)
       expect(product.name).to eq('Laptop')
       expect(product.price).to eq(999.99)
-      expect(product.category).to eq('Food')
+      expect(product.category).to eq('food')
     end
 
     it 'raises error when params are missing' do
