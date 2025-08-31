@@ -6,7 +6,7 @@ require './src/product'
 RSpec.describe Cart do
   subject(:cart) { described_class.new }
 
-  let(:book) { Product.new(name: 'Book', price: 999.99, category: 'food', imported: false) }
+  let(:book) { Product.new(name: 'Book', price: 12.49, category: 'book', imported: false) }
   let(:phone) { Product.new(name: 'Phone', price: 499.99, category: 'food', imported: false) }
   let(:taxable_product) { Product.new(name: 'Laptop', price: 1000, category: 'eletronic', imported: false) }
 
@@ -30,6 +30,7 @@ RSpec.describe Cart do
       it 'calculates and assigns tax amount to the product' do
         cart.add_product(taxable_product)
 
+        expect(cart.products.first.price_with_taxes).to eq(1_100)
         expect(cart.products.first.tax_amount).to eq(100)
       end
     end

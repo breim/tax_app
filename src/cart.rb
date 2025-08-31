@@ -10,7 +10,8 @@ class Cart
   def add_product(product)
     @tax_calculator = TaxCalculator.for(product)
 
-    product.tax_amount = @tax_calculator.tax_value
+    product.price_with_taxes = @tax_calculator.price_with_taxes
+    product.tax_amount = @tax_calculator.tax_amount
     @products << product
   end
 
