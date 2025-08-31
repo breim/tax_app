@@ -15,7 +15,7 @@ RSpec.describe Cart do
 
   describe '#add_product' do
     it 'adds a product to the cart' do
-      product = Product.new('Laptop', 999.99, 'Electronics')
+      product = Product.new(name: 'Laptop', price: 999.99, category: 'food', imported: false)
       subject.add_product(product)
       expect(subject.products).to include(product)
     end
@@ -23,8 +23,8 @@ RSpec.describe Cart do
 
   describe '#clear' do
     it 'clears all products from the cart' do
-      product1 = Product.new('Laptop', 999.99, 'Electronics')
-      product2 = Product.new('Phone', 499.99, 'Electronics')
+      product1 = Product.new(name: 'Laptop', price: 999.99, category: 'food', imported: false)
+      product2 = Product.new(name: 'Phone', price: 499.99, category: 'food', imported: false)
       subject.add_product(product1)
       subject.add_product(product2)
       subject.clear
