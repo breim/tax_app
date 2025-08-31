@@ -1,0 +1,12 @@
+plugins: rubocop-performance
+
+AllCops:
+  NewCops: enable
+  SuggestExtensions: false
+Documentation:
+  Enabled: false
+Lint/MissingSuper:
+  Enabled: false
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/**
