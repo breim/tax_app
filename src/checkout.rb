@@ -5,8 +5,8 @@ require './src/cart'
 class Checkout
   attr_reader :cart
 
-  def initialize(cart)
-    @cart = cart
+  def initialize
+    @cart = Cart.new
   end
 
   def total_with_taxes
