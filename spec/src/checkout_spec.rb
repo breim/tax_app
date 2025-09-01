@@ -36,4 +36,22 @@ RSpec.describe Checkout do
       expect(checkout.total_taxes_value).to eql(0.65)
     end
   end
+
+  describe '#grouped_receipt' do
+    it 'returns a grouped receipt for a single product' do
+      checkout.cart.add_product(book)
+      expect(checkout.grouped_receipt).to eq('1 Harry Potter: 12.49')
+    end
+
+    it 'returns a grouped receipt for multiple products with the same name' do
+      checkout.cart.add_product(book)
+      checkout.cart.add_product(book)
+
+      expect(checkout.grouped_receipt).to eq('2 Harry Potter: 24.98')
+    end
+
+    it 'returns an empty string when cart is empty' do
+      expect(checkout.grouped_receipt).to eq('')
+    end
+  end
 end
