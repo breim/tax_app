@@ -9,8 +9,8 @@ class TextParser
     imported = input_text.include?('imported')
     price = input_text.split.last.to_f
     quantity = input_text.split.first.to_i
-
     product = build_product(name, category, imported, price)
+
     { product: product, quantity: quantity }
   end
 
