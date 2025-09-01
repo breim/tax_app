@@ -22,6 +22,7 @@ module TaxCalculator
     exempt_category?(product) && !product.imported
   end
 
+  # NOTE: I've did this function on ChatGPT
   def self.round_up(amount)
     bd_amount = BigDecimal(amount.to_s)
     bd_nickel = BigDecimal('0.05')
