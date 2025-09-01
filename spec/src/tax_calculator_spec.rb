@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require './src/product'
 require './src/tax_calculator'
 
 RSpec.describe TaxCalculator do

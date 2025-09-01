@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require './src/cart'
-require './src/product'
 
 RSpec.describe Cart do
   subject(:cart) { described_class.new }
